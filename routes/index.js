@@ -2,13 +2,30 @@ const router = require("express").Router();
 
 router.get('/', (req, res) => {
     try {
-        res.render('index');
+        res.render('index', {layout: false});
     } catch (error) {
         console.error(error);
         res.status(500).send('Server Error');
     }
 });
 
+router.get('/homepage', (req, res) => {
+    try {
+        res.render('homepage');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server Error');
+    }
+});
+
+router.get('/shopping', (req, res) => {
+    try {
+        res.render('shopping', {layout: false});
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server Error');
+    }
+});
 
 router.get('/about', (req, res) => {
     try {

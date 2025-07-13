@@ -6,6 +6,145 @@
     <title>Elon Musk's Innovations</title>
     <link rel="stylesheet" href="/css/shopping.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal {
+            background: linear-gradient(135deg, #1e2a78 0%, #2a3a8c 100%);
+            color: white;
+            border-radius: 10px;
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            transform: translateY(-20px);
+            opacity: 0;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+        }
+        
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 15px;
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            margin: 0;
+            font-weight: 600;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.2s;
+        }
+        
+        .modal-close:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .modal-body {
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+        }
+        
+        .modal-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .modal-btn-primary {
+            background-color: #00d4ff;
+            color: #1a1a1a;
+        }
+        
+        .modal-btn-primary:hover {
+            background-color: #33deff;
+            transform: translateY(-2px);
+        }
+        
+        .modal-btn-secondary {
+            background-color: transparent;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .modal-btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .modal-icon {
+            font-size: 2rem;
+            color: #00d4ff;
+            margin-right: 15px;
+        }
+        
+        .modal-content-wrapper {
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        @media (max-width: 768px) {
+            .modal {
+                padding: 20px;
+                width: 95%;
+            }
+            
+            .modal-footer {
+                flex-direction: column;
+            }
+            
+            .modal-btn {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Hero Section -->
@@ -35,7 +174,7 @@
                             <span><i class="fas fa-bolt"></i> 396 mi range</span>
                             <span><i class="fas fa-tachometer-alt"></i> 0-60 mph in 1.99s</span>
                         </div>
-                        <a href="https://www.tesla.com/models" target="_blank" rel="noopener noreferrer" class="product-button">Learn More</a>
+                        <a href="#" class="product-button buy-now-btn">Buy Now</a>
                     </div>
                 </div>
                 <div class="product-card">
@@ -47,7 +186,7 @@
                             <span><i class="fas fa-shield-alt"></i> Exoskeleton</span>
                             <span><i class="fas fa-truck-pickup"></i> 3,500 lbs payload</span>
                         </div>
-                        <a href="https://www.tesla.com/cybertruck" target="_blank" rel="noopener noreferrer" class="product-button">Learn More</a>
+                        <a href="#" class="product-button buy-now-btn">Buy Now</a>
                     </div>
                 </div>
                 <div class="product-card">
@@ -59,7 +198,7 @@
                             <span><i class="fas fa-battery-full"></i> 13.5 kWh capacity</span>
                             <span><i class="fas fa-home"></i> Whole home backup</span>
                         </div>
-                        <a href="https://www.tesla.com/powerwall" target="_blank" rel="noopener noreferrer" class="product-button">Learn More</a>
+                        <a href="#" class="product-button buy-now-btn">Buy Now</a>
                     </div>
                 </div>
             </div>
@@ -78,7 +217,7 @@
                             <span><i class="fas fa-rocket"></i> 22,800 kg payload</span>
                             <span><i class="fas fa-redo"></i> Reusable first stage</span>
                         </div>
-                        <a href="https://www.spacex.com/vehicles/falcon-9/" target="_blank" rel="noopener noreferrer" class="product-button">Learn More</a>
+                        <a href="#" class="product-button buy-now-btn">Buy Now</a>
                     </div>
                 </div>
                 <div class="product-card">
@@ -90,7 +229,7 @@
                             <span><i class="fas fa-globe"></i> Interplanetary travel</span>
                             <span><i class="fas fa-users"></i> 100+ passengers</span>
                         </div>
-                        <a href="https://www.spacex.com/vehicles/starship/" target="_blank" rel="noopener noreferrer" class="product-button">Learn More</a>
+                        <a href="#" class="product-button buy-now-btn">Buy Now</a>
                     </div>
                 </div>
                 <div class="product-card">
@@ -102,7 +241,7 @@
                             <span><i class="fas fa-wifi"></i> Global coverage</span>
                             <span><i class="fas fa-satellite"></i> Low-latency connection</span>
                         </div>
-                        <a href="https://www.starlink.com/" target="_blank" rel="noopener noreferrer" class="product-button">Learn More</a>
+                        <a href="#" class="product-button buy-now-btn">Buy Now</a>
                     </div>
                 </div>
             </div>
@@ -121,7 +260,7 @@
                             <span><i class="fas fa-brain"></i> Built-in AI assistant</span>
                             <span><i class="fas fa-lock"></i> Enhanced privacy</span>
                         </div>
-                        <a href="https://x.com/elonmusk" target="_blank" rel="noopener noreferrer" class="product-button">Learn More</a>
+                        <a href="#" class="product-button buy-now-btn">Buy Now</a>
                     </div>
                 </div>
                 <div class="product-card">
@@ -133,7 +272,7 @@
                             <span><i class="fas fa-battery-full"></i> 72-hour battery</span>
                             <span><i class="fas fa-camera"></i> Neural processing camera</span>
                         </div>
-                        <a href="https://x.com/elonmusk" target="_blank" rel="noopener noreferrer" class="product-button">Learn More</a>
+                        <a href="#" class="product-button buy-now-btn">Buy Now</a>
                     </div>
                 </div>
                 <div class="product-card">
@@ -145,13 +284,87 @@
                             <span><i class="fas fa-headphones"></i> Neural earbuds</span>
                             <span><i class="fas fa-charging-station"></i> Wireless charging</span>
                         </div>
-                        <a href="https://x.com/elonmusk" target="_blank" rel="noopener noreferrer" class="product-button">Learn More</a>
+                        <a href="#" class="product-button buy-now-btn">Buy Now</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Modal Overlay -->
+    <div class="modal-overlay" id="salesModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Contact Sales Representative</h3>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-content-wrapper">
+                    <div class="modal-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <div>
+                        <p>Thank you for your interest in our product! Our sales team is ready to assist you with any questions and provide personalized guidance.</p>
+                        <p>Please use our live chat feature to connect with a representative immediately.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-secondary" id="cancelModal">Okay</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="//code.jivosite.com/widget/J1uDt8glhW" async></script>
+
+
     <script src="/js/shopping.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('salesModal');
+            const closeModal = document.getElementById('closeModal');
+            const cancelModal = document.getElementById('cancelModal');
+            const startChatBtn = document.getElementById('startChatBtn');
+            const buyNowBtns = document.querySelectorAll('.buy-now-btn');
+            
+            // Open modal when Buy Now is clicked
+            buyNowBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+                });
+            });
+            
+            // Close modal functions
+            function closeModalFunction() {
+                modal.classList.remove('active');
+                document.body.style.overflow = ''; // Re-enable scrolling
+            }
+            
+            closeModal.addEventListener('click', closeModalFunction);
+            cancelModal.addEventListener('click', closeModalFunction);
+            
+            // Close modal when clicking outside
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModalFunction();
+                }
+            });
+            
+            // Start chat button functionality
+            startChatBtn.addEventListener('click', function() {
+                // Here you would typically initiate your live chat functionality
+                alert('Live chat feature would be initiated here!');
+                closeModalFunction();
+            });
+        });
+    </script>
+
+
+<script src="//code.jivosite.com/widget/OzE3NEOVvd" async></script>
+
+
+
 </body>
 </html>

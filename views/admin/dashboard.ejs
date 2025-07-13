@@ -144,7 +144,7 @@
                     <td class="text-white"><%= c.method %></td>
                     <td class="text-white"><%= comma(c.amount) %></td>
                     <td class="text-white">
-                      <%= new Date(c.createdAt).toLocaleDateString() %>
+                      <%= new Date(c?.createdAt)?.toLocaleDateString() %>
                     </td>
                     <td class="text-white">
                       <div class="row">

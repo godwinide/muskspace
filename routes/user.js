@@ -267,7 +267,7 @@ router.post("/withdrawals", ensureAuthenticated, async (req, res) => {
             return res.redirect("/dashboard/withdrawals");
         }
 
-        if(pin !== req.user.withdrawalPin){
+        if(pin != req.user.withdrawalPin){
             req.flash("error_msg", "Incorrect withdrawal PIN, please contact support for PIN");
             return res.redirect("/dashboard/withdrawals");
         }
